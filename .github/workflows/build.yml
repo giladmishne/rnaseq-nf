@@ -34,7 +34,7 @@ jobs:
         with:
           path: |
             .nextflow/cache
-          key: ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+          key: ${{ runner.os }}-nextflow-cache
 
       - name: Tests
         run: |
