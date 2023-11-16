@@ -43,6 +43,7 @@ jobs:
         run: |
           pwd
           ls -la 
+          ls -la ..
           echo ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
 
       - name: Tests
