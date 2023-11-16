@@ -36,16 +36,17 @@ jobs:
             .nextflow/cache
           key: ${{ runner.os }}-nextflow-cache
 
+      - name: Post-Cache
+        run: |
+          pwd
+          ls -la .nextflow/cache/
+          du -sh .nextflow/cache/
+          echo ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+
       - name: Tests
         run: |
           curl -fsSL get.nextflow.io | bash
           ./nextflow run . -profile docker
         env:
           NXF_ANSI_LOG: false
-
-      - name: Post-Cache
-        run: |
-          ls -la .nextflow/cache/
-          du -sh .nextflow/cache/
-          echo ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
 
