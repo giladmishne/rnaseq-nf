@@ -48,6 +48,7 @@ jobs:
 
       - name: Tests
         run: |
+          export CAPSULE_LOG=none
           curl -fsSL get.nextflow.io | bash
           ./nextflow run . -profile docker
         env:
