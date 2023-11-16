@@ -33,8 +33,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            .nextflow/cache
-          key: ${{ runner.os }}-nextflow-cache
+            work
+            .nextflow/
+          key: ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+          restore-keys: |
+            ${{ runner.os }}-nextflow-
 
       - name: Post-Cache
         run: |
