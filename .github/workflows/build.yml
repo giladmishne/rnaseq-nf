@@ -35,7 +35,7 @@ jobs:
           path: |
             work
             .nextflow/
-          key: ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+          key: ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
           restore-keys: |
             ${{ runner.os }}-nextflow-
 
@@ -43,8 +43,9 @@ jobs:
         run: |
           pwd
           ls -la 
-          ls -la ..
-          echo ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+          ls -la work
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
 
       - name: Tests
         run: |
