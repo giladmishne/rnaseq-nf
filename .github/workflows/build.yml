@@ -44,6 +44,7 @@ jobs:
           pwd
           ls -la 
           ls -la work
+          du -sh work
           echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
 
