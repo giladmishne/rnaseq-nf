@@ -45,6 +45,6 @@ jobs:
 
       - name: Post-Cache
         run: |
-          ls -la
-          echo 'home'
-          ls -la ~/
+          ls -la .nextflow/cache/
+          echo ${{ runner.os }}-nextflow-cache-${{ hashFiles('.nextflow/cache/**') }}
+
