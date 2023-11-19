@@ -42,7 +42,6 @@ jobs:
       - name: Tests
         run: |
           [ -f work ] && du -s work
-          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*.{nf.config,schema,R,py,yml}') }}
           export CAPSULE_LOG=none
           curl -fsSL get.nextflow.io | bash
@@ -54,6 +53,5 @@ jobs:
       - name: Post-Tests
         run: |
           du -s work
-          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*.{nf.config,schema,R,py,yml}') }}
           egrep -e '(Cached|Submitted) process ' .nextflow.log | cut -d- -f3-
