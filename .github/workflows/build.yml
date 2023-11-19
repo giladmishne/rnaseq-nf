@@ -39,7 +39,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextflow
 
-      - name: Post-Cache
+      - name: Tests
+        run: |
+          pwd
+          ls -la
+          export CAPSULE_LOG=none
+          curl -fsSL get.nextflow.io | bash
+          ./nextflow run . -profile docker -resume
+        env:
+          NXF_ANSI_LOG: false
+
+      - name: Post-Tests
         run: |
           pwd
           ls -la
@@ -49,12 +59,4 @@ jobs:
           echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
           egrep -e '(Cached|Submitted) process ' .nextflow.log | cut -d- -f3-
-
-      - name: Tests
-        run: |
-          export CAPSULE_LOG=none
-          curl -fsSL get.nextflow.io | bash
-          ./nextflow run . -profile docker -resume
-        env:
-          NXF_ANSI_LOG: false
 
