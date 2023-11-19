@@ -35,7 +35,7 @@ jobs:
           path: |
             work
             .nextflow/
-          key: ${{ runner.os }}-nf-cache-${{ hashFiles('**/*.nf') }}
+          key: ${{ runner.os }}-nf-cache-${{ hashFiles('**/*.nf') }}-${{ hashFiles('**/*.config') }}
           restore-keys: |
             ${{ runner.os }}-nf-cache-
 
