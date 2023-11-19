@@ -46,7 +46,6 @@ jobs:
           export CAPSULE_LOG=none
           curl -fsSL get.nextflow.io | bash
           ./nextflow run . -profile docker -resume
-          cat .nextflow.log
         env:
           NXF_ANSI_LOG: false
 
