@@ -52,6 +52,6 @@ jobs:
 
       - name: Post-Tests
         run: |
-          du -s work
+          [ -f work ] && du -s work
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*.{nf.config,schema,R,py,yml}') }}
           egrep -e '(Cached|Submitted) process ' .nextflow.log | cut -d- -f3-
