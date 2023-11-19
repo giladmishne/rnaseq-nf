@@ -3,10 +3,11 @@ params.outdir = 'results'
 process MULTIQC {
     conda 'multiqc=1.17'
     publishDir params.outdir, mode:'copy'
+    cache 'lenient'
 
     input:
-    path('*') 
-    path(config) 
+    path('*')
+    path(config)
 
     output:
     path('multiqc_report.html')
