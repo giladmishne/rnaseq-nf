@@ -35,14 +35,17 @@ jobs:
           path: |
             work
             .nextflow/
-          key: ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
+          key: ${{ runner.os }}-nextflow-${{ hashFiles('**/*{nf.config,schema,R,py,yml') }}
           restore-keys: |
             ${{ runner.os }}-nextflow
 
       - name: Tests
         run: |
-          pwd
-          ls -la
+          ls -lR work
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('work/**') }}
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*{nf.config,schema,R,py,yml') }}
           export CAPSULE_LOG=none
           curl -fsSL get.nextflow.io | bash
           ./nextflow run . -profile docker -resume
@@ -51,12 +54,9 @@ jobs:
 
       - name: Post-Tests
         run: |
-          pwd
-          ls -la
-          ls -la work
-          du -sh work
+          ls -lR work
           echo ${{ runner.os }}-nextflow-${{ hashFiles('work/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
+          echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*{nf.config,schema,R,py,yml') }}
           egrep -e '(Cached|Submitted) process ' .nextflow.log | cut -d- -f3-
-
