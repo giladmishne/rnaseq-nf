@@ -48,6 +48,7 @@ jobs:
           echo ${{ runner.os }}-nextflow-${{ hashFiles('work/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('.nextflow/cache/**') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
+          egrep -e '(Cached|Submitted) process ' .nextflow.log | cut -d- -f3-
 
       - name: Tests
         run: |
