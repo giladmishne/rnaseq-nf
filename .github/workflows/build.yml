@@ -41,7 +41,7 @@ jobs:
 
       - name: Tests
         run: |
-          du -s work
+          [ -f work ] && du -s work
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/nextflow.config') }}
           echo ${{ runner.os }}-nextflow-${{ hashFiles('**/*.{nf.config,schema,R,py,yml}') }}
           export CAPSULE_LOG=none
