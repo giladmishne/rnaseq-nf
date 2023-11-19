@@ -43,6 +43,7 @@ jobs:
         run: |
           [ -f work ] && du -s work
           echo ${{ runner.os }}-nf-${{ hashFiles('**/*.{nf,config,schema,R,py,yml}') }}
+          echo ${{ runner.os }}-nf-${{ hashFiles('**/*.nf') }}
           export CAPSULE_LOG=none
           curl -fsSL get.nextflow.io | bash
           ./nextflow run . -profile docker -resume
